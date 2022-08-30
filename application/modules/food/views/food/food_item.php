@@ -20,7 +20,7 @@ $vegnonveg= $this->category_model->get_cat_desc_account_name($vendor_category_id
 
 				<div class="form-row">
 					<div class="form-group col-md-4">
-						<label><?=(($this->ion_auth->is_admin())? 'Menu' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_menu'));?></label>
+						<label>Category</label>
 						<select class="form-control" name="menu_id" required="" >
 							<option value="" selected disabled>--select--</option>
     							<?php foreach ($food_items as $item):?>
@@ -31,74 +31,22 @@ $vegnonveg= $this->category_model->get_cat_desc_account_name($vendor_category_id
 						<?php echo form_error('menu_id','<div style="color:red>"','</div>');?>
 					</div>
 					<div class="form-group col-md-4">
-						<label><?=(($this->ion_auth->is_admin())? 'Item Name' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_name'));?></label> <input type="text"
+						<label>Project Name</label> <input type="text"
 							class="form-control" name="name" required="" value="<?php echo set_value('name')?>">
-						<div class="invalid-feedback"><?=(($this->ion_auth->is_admin())? 'New Item Name' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_name'));?>?</div>
+						<div class="invalid-feedback">Project Name?</div>
 						<?php echo form_error('name','<div style="color:red">','</div>')?>
 					</div>
 					<div class="form-group mb-0 col-md-4">
-						<label><?=(($this->ion_auth->is_admin())? 'Price' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_price'));?></label> <input type="number" class="form-control" name="price" required="" value="<?php echo set_value('price')?>">
-						<div class="invalid-feedback"><?=(($this->ion_auth->is_admin())? 'Price' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_price'));?></div>
+						<label>Cost</label> <input type="number" class="form-control" name="price" required="" value="<?php echo set_value('price')?>">
+						<div class="invalid-feedback">Cost</div>
 						<?php echo form_error('price','<div style="color:red">','</div>');?>
 					</div>
-
-					<div class="form-group mb-0 col-md-2">
-						<label><?=(($this->ion_auth->is_admin())? 'Quantity' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_quantity'));?></label> 
-						<input type="number" class="form-control" name="quantity" required="" value="1" min="1">
-						<div class="invalid-feedback"><?=(($this->ion_auth->is_admin())? 'Give Atleast 1 Quantity' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_quantity'));?></div>
-						<?php echo form_error('quantity','<div style="color:red">','</div>');?>
-					</div>
-					<?php
-                    if($this->ion_auth->is_admin() || $vegnonveg == 1){
-                    ?>
-					<div class="form-group mb-0 col-md-3">
-						<label><?=(($this->ion_auth->is_admin())? 'Veg / Non-Veg' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_veg_non_veg'));?></label> 
-						<?php $veg=explode('/',(($this->ion_auth->is_admin())? 'Veg / Non-Veg' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_veg_non_veg')));?>
-						<div  class="form-control"> 
-						<label><input type="radio" name="item_type" required="" value="1" checked=""> <?=$veg[0];?> </label>&nbsp;&nbsp;&nbsp;<label><input type="radio" name="item_type" required="" value="2"> <?=$veg[1];?></label>
-						</div>
-					</div>
-					<?php }else{
-						?>
-						<input type="hidden" name="item_type" required="" value="1" checked="">
-						<?php
-					}?>
-					<!-- <div class="form-group col-md-4">
-						<label><?=(($this->ion_auth->is_admin())? 'Section Price' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_sec_price'));?></label>
-						<select class="form-control" name="menu_id" required="" >
-							<option value="1" selected>Item Price Replace With Section Price</option>
-							<option value="2">Section Price Add To Item Price</option>
-							<option value="3">No Section Price</option>
-						</select>
-						<div class="invalid-feedback"><?=(($this->ion_auth->is_admin())? 'New Menu Name' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_menu'));?>?</div>
-						<?php echo form_error('menu_id','<div style="color:red>"','</div>');?>
-					</div> -->
 					<div class="form-group mb-0 col-md-4">
 						<label><?=(($this->ion_auth->is_admin())? 'Item Status' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_status'));?></label> 
 						<div  class="form-control"> 
 						<label><input type="radio" name="status" required="" value="1" checked=""> Available </label>&nbsp;&nbsp;&nbsp;<label><input type="radio" name="status" required="" value="2"> Not-Available</label>
 						</div>
 					</div>
-					<div class="form-group mb-0 col-md-2">
-						<label> <?=(($this->ion_auth->is_admin())? 'Discount in' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_discount'));?>%</label> 
-						<input type="number" class="form-control" name="discount" required="" value="0" min="0">
-					</div>
-					<!-- <?php
-                    if($vendor_category_id == 6){
-                    ?>
-                      <div class="form-group mb-0 col-md-2">
-                        <label>Experience<?=(($this->ion_auth->is_admin())? 'Menus' : $this->category_model->get_cat_desc_account_name($vendor_category_id,2));?></label> 
-                        <input type="number" class="form-control" name="exp" required="" value="<?php echo set_value('exp')?>" min="1">
-                        <div class="invalid-feedback">Experience</div>
-                        <?php echo form_error('exp','<div style="color:red">','</div>');?>
-                    </div>
-                      <div class="form-group mb-0 col-md-4">
-                        <label>Qualification<?=(($this->ion_auth->is_admin())? 'Menus' : $this->category_model->get_cat_desc_account_name($vendor_category_id,2));?></label> 
-                        <input type="text" class="form-control" name="qualification" required="" value="<?php echo set_value('qualification')?>">
-                        <div class="invalid-feedback">Enter Qualification</div>
-                        <?php echo form_error('qualification','<div style="color:red">','</div>');?>
-                    </div>
-                <?php }?> -->
 					<div class="form-group col-md-4">
 						<label><?=(($this->ion_auth->is_admin())? 'Upload Image' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_image'));?></label> 
 						
@@ -113,15 +61,15 @@ $vegnonveg= $this->category_model->get_cat_desc_account_name($vendor_category_id
 						<input type="text" class="form-control" name="label" value="" placeholder="Ex:ex: trending, hot deal, 50% off etc.">
 					</div>
 					<div class="form-group mb-0 col-md-4">
-						<label>Short Description</label> 
+						<label>Address</label> 
 						<textarea class="form-control"  name="short_desc" data-sample-short placeholder="Short Details" required=""><?php echo set_value('short_desc')?></textarea>
-						<div class="invalid-feedback">Give some Description</div>
+						<div class="invalid-feedback">Address</div>
 						<?php echo form_error('short_desc','<div style="color:red">','</div>');?>
 					</div>
 					<div class="form-group mb-0 col-md-12">
-						<label><?=(($this->ion_auth->is_admin())? 'Description' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_desc'));?></label> 
+						<label>Description</label> 
 						<textarea class="form-control ckeditor"  name="desc" data-sample-short placeholder="Product Details" required=""><?php echo set_value('desc')?></textarea>
-						<div class="invalid-feedback"><?=(($this->ion_auth->is_admin())? 'Give some Description' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_desc'));?></div>
+						<div class="invalid-feedback">Give some Description</div>
 						<?php echo form_error('desc','<div style="color:red">','</div>');?>
 					</div>
 					<div class="form-group col-md-12 mt-4 pt-2">
@@ -148,17 +96,9 @@ $vegnonveg= $this->category_model->get_cat_desc_account_name($vendor_category_id
 							<thead>
 								<tr>
 									<th>Id</th>
-									<th><?=(($this->ion_auth->is_admin())? 'Item Name' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_name'));?></th>
-									<th><?=(($this->ion_auth->is_admin())? 'Menu' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_menu'));?></th>
-									<th><?=(($this->ion_auth->is_admin())? 'Description' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_desc'));?></th>
-									<th><?=(($this->ion_auth->is_admin())? 'Price' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_price'));?></th>
-									<th><?=(($this->ion_auth->is_admin())? 'Discount' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_discount'));?> (%)</th>
-									<?php
-									 if($this->ion_auth->is_admin() || $vegnonveg == 1){
-									 ?>
-									<th><?=(($this->ion_auth->is_admin())? 'Veg / Non-Veg' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_veg_non_veg'));?></th>
-								<?php }?>
-									<th><?=(($this->ion_auth->is_admin())? 'Quantity' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_quantity'));?></th>
+									<th>Project Name</th>
+									<th>Category</th>
+									<th>Cost</th>
 									<th><?=(($this->ion_auth->is_admin())? 'Status' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_status'));?></th>
 									<th><?=(($this->ion_auth->is_admin())? 'Image' : $this->category_model->get_cat_desc_account_name($vendor_category_id,'item_image'));?></th>
 									<th>Actions</th>
@@ -171,16 +111,8 @@ $vegnonveg= $this->category_model->get_cat_desc_account_name($vendor_category_id
     								<tr>
     									<td><?php echo $sno++;?></td>
     									<td><?php echo $food_sub_item['name'];?></td>
-    									<td><?php echo $food_sub_item['menu']['name'];?></td>
-    									<td><?php echo $food_sub_item['desc'];?></td>
+    									<td><?php echo $food_sub_item['category']['name'];?></td>
     									<td><?php echo $food_sub_item['price'];?></td>
-    									<td><?php echo $food_sub_item['discount'];?></td>
-    									<?php
-									 if($this->ion_auth->is_admin() || $vegnonveg == 1){
-									 ?>
-    									<td><?=($food_sub_item['item_type']==1)? $veg[0] : $veg[1];?></td>
-    								<?php }?>
-    									<td><?php echo $food_sub_item['quantity'];?></td>
     									<td><?php echo ($food_sub_item['status']==1)? 'Available' : 'Not Available' ;?></td>
     									<td><img
     										src="<?php echo base_url();?>uploads/food_item_image/food_item_<?php echo $food_sub_item['id'];?>.jpg" class="img-thumb"></td>

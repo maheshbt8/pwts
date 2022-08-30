@@ -249,13 +249,10 @@ $this->data['food_items'] =$me;
                         $input_data=array(
                         'menu_id' => $this->input->post('menu_id'),
                         'price' => $this->input->post('price'),
-                        'quantity' => $this->input->post('quantity'),
                         'status' => $this->input->post('status'),
-                        'item_type' => $this->input->post('item_type'),
                         'name' => $this->input->post('name'),
                         'short_desc' => $this->input->post('short_desc'),
                         'desc' => $this->input->post('desc'),
-                        'discount' => $this->input->post('discount'),
                         'label' => $this->input->post('label'),
                         'approval_status' => $approval_status
                     );
@@ -294,9 +291,9 @@ $this->data['food_items'] =$me;
                     $w_r=$w_r .' and ('. $su.')';
                 }
 
-                $this->db->where($w_r);
-                $this->data['food_items'] = $this->food_menu_model->fields('id,name,desc,vendor_id')->get_all();
-                
+            /*    $this->db->where($w_r);
+                $this->data['food_items'] = $this->food_menu_model->fields('id,name,desc,vendor_id')->get_all();*/
+                $this->data['food_items'] =$this->category_model->fields('id,name,desc')->get_all();
                 $menus=array_column($this->data['food_items'],'id');
                 if ($this->ion_auth->is_admin()){
                     $w_r1='(created_user_id = '.$this->ion_auth->get_user_id().')';    
@@ -305,7 +302,7 @@ $this->data['food_items'] =$me;
                 }
                 $me=array();
                 foreach ($this->data['food_items'] as $menu) {
-                     $a=$this->data['food_sub_items'] = $this->food_item_model->with_menu('fields:id,name,vendor_id')->where($w_r1)->where('menu_id',$menu['id'])->order_by('id', 'ASCE')->get_all();
+                     $a=$this->data['food_sub_items'] = $this->food_item_model->with_category('fields:id,name')->where($w_r1)->where('menu_id',$menu['id'])->order_by('id', 'ASCE')->get_all();
                   if(!empty($a)){ 
                   foreach ($a as $s) {
                     $cou=$this->db->get_where('deleted_items',array('vendor_id'=>$this->ion_auth->get_user_id(),'item_id'=>$s['id']))->num_rows();
@@ -315,9 +312,7 @@ $this->data['food_items'] =$me;
                   }
                 }
                 }
-
-$this->data['food_sub_items'] =$me;
-               // $this->data['food_sub_items'] = $this->food_item_model->with_menu('fields:id,name,vendor_id','where: vendor_id='.$this->ion_auth->get_user_id())->get_all();
+                $this->data['food_sub_items'] =$me;
                 $this->_render_page($this->template, $this->data);
             } elseif ($type == 'u') {
                 $this->form_validation->set_rules($this->food_item_model->rules);

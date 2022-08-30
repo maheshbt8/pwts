@@ -35,7 +35,8 @@ class Food_item_model extends MY_Model
     }
     public function _relations()
     {       
-    $this->has_one['menu'] = array('Food_menu_model','id','menu_id');
+    //$this->has_one['menu'] = array('Food_menu_model','id','menu_id');
+    $this->has_one['category'] = array('Category_model','id','menu_id');
    /*   $this->has_many['menu'] = array(
             'foreign_model' => 'Food_menu_model',
             'foreign_table' => 'food_menu',
@@ -89,22 +90,8 @@ class Food_item_model extends MY_Model
                 
             ),
             array(
-                'field'=>'quantity',
-                'label'=>'Quantity',
-                'rules'=>'trim|required',
-                'erors'=>array(
-                    'max_length'=>'Please Give Quantity'
-                )
-                
-            ),
-            array(
                 'field'=>'status',
                 'label'=>'Status',
-                'rules'=>'trim|required'
-            ),
-            array(
-                'field'=>'item_type',
-                'label'=>'Item Type',
                 'rules'=>'trim|required'
             ),
         );
