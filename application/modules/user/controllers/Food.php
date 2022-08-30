@@ -124,7 +124,7 @@ class Food extends MY_REST_Controller
      * @author Mahesh
      * @param string $target
      */
-    public function food_items_get($menu_id,$vendor_id)
+    public function food_items_get($menu_id,$vendor_id=1)
     {
         if (! empty($menu_id) && !empty($vendor_id)) {
             
@@ -144,7 +144,7 @@ class Food extends MY_REST_Controller
                 if (! empty($this->get('item_type'))) {
                 $this->db->where('item_type', $this->get('item_type'));
             }
-            $data = $this->food_item_model->fields('id,name,desc,price,discount,quantity,item_type,status,created_user_id')
+            $data = $this->food_item_model->fields('id,name,desc,price,status,created_user_id')
                 ->where($w_r1)
                 ->where('menu_id', $menu_id)
                 ->where('approval_status',1)
@@ -177,10 +177,6 @@ class Food extends MY_REST_Controller
                 }
                 $res['result'] = $items;
             }
-            $res['item_type'] = [
-                '1' => 'Veg',
-                '2' => 'Non-Veg'
-            ];
             $this->set_response_simple(($res == FALSE) ? FALSE : $res, 'Success..!', REST_Controller::HTTP_OK, TRUE);
         }
     }
