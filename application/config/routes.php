@@ -121,3 +121,8 @@ $route['promos/(.+)'] = 'promos/index/$1';
 
 /*Payment*/
 $route['wallet_transactions/(:any)'] = 'payment/wallet_transactions/$1';
+
+
+
+
+$route['projects/(:any)']='user/food/food_items/$1';
